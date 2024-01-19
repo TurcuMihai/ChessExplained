@@ -56,10 +56,3 @@ print('\nBlack moves:')
 for move in black_moves_freq:
     if (black_moves_freq[tuple(move[-3:])] > 1):
         print(move, black_moves_freq[move[-3:]])
-
-
-#   {
-#     tokens: ["pawn", "promotion", "how", "realised"]
-#     response: "Pawn promotion is when a pawn reaches the other side of the board and is replaced by a queen, rook, bishop or knight of the same color."
-#   }
-        
