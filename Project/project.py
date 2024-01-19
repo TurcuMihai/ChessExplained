@@ -78,12 +78,7 @@ def best_move_fen_configuration():
             # make the best move on the board
             # actualize the board with the new move
             stockfish.make_moves_from_current_position([best_move_uci])
-            if board.turn == chess.WHITE:
-                board.push(best_move)
-            else:
-                legal_moves_list = list(board.legal_moves)
-                if legal_moves_list:
-                    board.push(legal_moves_list[0])
+            board.push_san(best_move_uci)
             print(board)
             
         else:
@@ -141,6 +136,14 @@ def get_explanation(board, move):
         return get_explanation_white_bishop(board, move)
     elif board.piece_at(move.from_square).symbol() == 'b':
         return get_explanation_black_bishop(board, move)
+    elif board.piece_at(move.from_square).symbol() == 'R':
+        return get_explanation_white_rook(board, move)
+    elif board.piece_at(move.from_square).symbol() == 'r':
+        return get_explanation_black_rook(board, move)
+    elif board.piece_at(move.from_square).symbol() == 'N':
+        return get_explanation_white_knight(board, move)
+    elif board.piece_at(move.from_square).symbol() == 'n':
+        return get_explanation_black_knight(board, move)
     
     return "Ai realizat o mutare strategică care îți oferă control asupra centrului tablei și te pregătește pentru etapele ulterioare ale partidei."
 
@@ -325,18 +328,116 @@ def get_explanation_black_bishop(board,move):
                 return " Prin aceasta mutare, consolidezi pozitia nebunului si poti sa pregatesti o actiune strategica, din mijlocul tablei."           
             return " Prin aceasta mutare, nebunul joaca un rol mai activ in capturarea de pioni sau in limitarea mobilitatii regelui advers."
             
-        
+
+def get_explanation_white_rook(borad,move):
+    if move.from_square in ALL_SQUARES and \
+        move.to_square in [chess.A5, chess.B5, chess.C5, chess.D5, chess.E5, chess.F5, chess.G5, chess.H5,
+                           chess.A6, chess.B6, chess.C6, chess.D6, chess.E6, chess.F6, chess.G6, chess.H6,
+                          chess.A7, chess.B7, chess.C7, chess.D7, chess.E7, chess.F7, chess.G7, chess.H7,
+                          chess.A8, chess.B8, chess.C8, chess.D8, chess.E8, chess.F8, chess.G8, chess.H8]:
+        return " Aceasta mutare pregateste jocul pentru urmatoarele mutari strategice. Turnul este o piesa esentiala in crearea amenintarilor asupra regelui advers."
+    if move.from_square in ALL_SQUARES and \
+        move.to_square in [chess.A3, chess.B3, chess.C3, chess.D3, chess.E3, chess.F3, chess.G3, chess.H3,
+                           chess.A4, chess.B4, chess.C4, chess.D4, chess.E4, chess.F4, chess.G4, chess.H4]:
+        return " Aceasta mutare ajuta la formarea unei influente mai mari asupra pozitiei globale a tablei"
+    if move.from_square in ALL_SQUARES and \
+        move.to_square in [chess.A1, chess.B1, chess.C1, chess.D1, chess.E1, chess.F1, chess.G1, chess.H1,
+                            chess.A2, chess.B2, chess.C2, chess.D2, chess.E2, chess.F2, chess.G2, chess.H2]:
+        return " Aceasta mutare a turnului ajuta la o mai buna protectie a pieselor albe  ."
+    return " Prin aceasta mutare, turnul ajuta la un control mai bun al tablei de joc."
+
+def get_explanation_black_rook(board,move):
+    if move.from_square in ALL_SQUARES and \
+        move.to_square in [chess.A4, chess.B4, chess.C4, chess.D4, chess.E4, chess.F4, chess.G4, chess.H4,
+                           chess.A3, chess.B3, chess.C3, chess.D3, chess.E3, chess.F3, chess.G3, chess.H3,
+                          chess.A2, chess.B2, chess.C2, chess.D2, chess.E2, chess.F2, chess.G2, chess.H2,
+                          chess.A1, chess.B1, chess.C1, chess.D1, chess.E1, chess.F1, chess.G1, chess.H1]:
+        return " Aceasta mutare pregateste jocul pentru urmatoarele mutari strategice. Turnul este o piesa esentiala in crearea de amenintati asupra regelui advers."
+    if move.from_square in ALL_SQUARES and \
+        move.to_square in [chess.A6, chess.B6, chess.C6, chess.D6, chess.E6, chess.F6, chess.G6, chess.H6,
+                           chess.A5, chess.B5, chess.C5, chess.D5, chess.E5, chess.F5, chess.G5, chess.H5]:
+        return " Aceasta mutare ajuta la formarea unei influente mai mari asupra pozitiei globale a tablei"
+    if move.from_square in ALL_SQUARES and \
+        move.to_square in [chess.A8, chess.B8, chess.C8, chess.D8, chess.E8, chess.F8, chess.G8, chess.H8,
+                            chess.A7, chess.B7, chess.C7, chess.D7, chess.E7, chess.F7, chess.G7, chess.H7]:
+        return " Aceasta mutare a turnului ajuta la o mai buna protectie a pieselor negre."
+    return " Prin aceasta mutare, turnul ajuta la un control mai bun al tablei de joc."
+
+
+def get_explanation_white_knight(board, move):
+    if move.from_square in [chess.B1, chess.G1] and move.to_square in [chess.C3, chess.F3]:
+        return " Prin aceasta mutare, calul este scos in fata pentru a pregati urmatoarele actini strategice."
+    if move.from_square in [chess.C3, chess.F3] and move.to_square in [chess.D5, chess.E5]:
+        return " Prin aceasta mutare, calul controleaza un câmp central cheie și amenințând pionii negri."
+    if move.from_square in [chess.B1, chess.G1] and move.to_square in [chess.A3, chess.H3]:
+        return " Prin aceasta mutare, calul este pregatit pentru un atac pe flanc."
+    if move.from_square in [chess.C3, chess.F3] and move.to_square in [chess.E4, chess.D4, chess.D5, chess.E5]:
+        return " Prin aceasta mutare, calul ocupa o pozitie ofensiva si obtine un control mai bun asupra centrului tablei."
+    if move.from_square in ALL_SQUARES and \
+        move.to_square in [chess.A4, chess.B4, chess.G4, chess.H4,
+                           chess.A5, chess.B5, chess.G5, chess.H5,
+                           chess.A6, chess.B6, chess.G6, chess.H6]:
+        return "Aceata mutare pregateste calul pentru o actiune strategica pe flanc."
+    if move.from_square in ALL_SQUARES and \
+        move.to_square in [chess.A3, chess.B3, chess.C3, chess.D3, chess.E3, chess.F3, chess.G3, chess.H3,
+                           chess.A2, chess.B2, chess.C2, chess.D2, chess.E2, chess.F2, chess.G2, chess.H2,
+                           chess.A1, chess.B1, chess.C1, chess.D1, chess.E1, chess.F1, chess.G1, chess.H1]:
+        return " Prin aceasta mutare, calul joaca defensiv si protejeaza piesele albe."
+    if move.from_square in ALL_SQUARES and \
+        move.to_square in [chess.A7, chess.B7, chess.C7, chess.D7, chess.E7, chess.F7, chess.G7, chess.H7,
+                            chess.A8, chess.B8, chess.C8, chess.D8, chess.E8, chess.F8, chess.G8, chess.H8]:
+        return " Aceasta mutare a calului este una ofensiva si pune presiune asupra pieselor negre."
+    if move.from_square in ALL_SQUARES and \
+        move.to_square in [chess.C4, chess.D4, chess.E4, chess.F4,
+                            chess.C5, chess.D5, chess.E5, chess.F5,
+                            chess.C6, chess.D6, chess.E6, chess.F6]:
+        return " Prin aceasta mutare, calul obtine control asupra centrului tablei."
+    
+    return " Aceasta mutare pregateste jocul pentru urmatoarele mutari strategice. Calul este o piesa esentiala in crearea de amenintari asupra regelui advers."
+
+
+def get_explanation_black_knight(board, move):
+    if move.from_square in [chess.B8, chess.G8] and move.to_square in [chess.C6, chess.F6]:
+        return " Prin aceasta mutare, calul este scos in fata pentru a pregati urmatoarele actini strategice."
+    if move.from_square in [chess.C6, chess.F6] and move.to_square in [chess.D4, chess.E4]:
+        return " Prin aceasta mutare, calul controleaza un câmp central cheie și amenințând pionii albi."
+    if move.from_square in [chess.G8, chess.B8] and move.to_square in [chess.H6, chess.A6]:
+        return " Prin aceasta mutare, calul este pregatit pentru un atac pe flanc."
+    if move.from_square in [chess.F6, chess.C6] and move.to_square in [chess.D5, chess.E5, chess.E4, chess.D4]:
+        return " Prin aceasta mutare, calul ocupa o pozitie ofensiva si obtine un control mai bun asupra centrului tablei." 
+    if move.from_square in ALL_SQUARES and \
+        move.to_square in [chess.A5, chess.B5, chess.G5, chess.H5,
+                           chess.A4, chess.B4, chess.G4, chess.H4,
+                           chess.A3, chess.B3, chess.G3, chess.H3]:
+        return "Aceata mutare pregateste calul pentru o actiune strategica pe flanc."
+    if move.from_square in ALL_SQUARES and \
+        move.to_square in [chess.A6, chess.B6, chess.C6, chess.D6, chess.E6, chess.F6, chess.G6, chess.H6,
+                           chess.A7, chess.B7, chess.C7, chess.D7, chess.E7, chess.F7, chess.G7, chess.H7,
+                           chess.A8, chess.B8, chess.C8, chess.D8, chess.E8, chess.F8, chess.G8, chess.H8]:
+        return " Prin aceasta mutare, calul joaca defensiv si protejeaza piesele negre."
+    if move.from_square in ALL_SQUARES and \
+        move.to_square in [chess.A2, chess.B2, chess.C2, chess.D2, chess.E2, chess.F2, chess.G2, chess.H2,
+                            chess.A1, chess.B1, chess.C1, chess.D1, chess.E1, chess.F1, chess.G1, chess.H1]:
+        return " Aceasta mutare a calului este una ofensiva si pune presiune asupra pieselor albe."
+    if move.from_square in ALL_SQUARES and \
+        move.to_square in [chess.C5, chess.D5, chess.E5, chess.F5,
+                            chess.C4, chess.D4, chess.E4, chess.F4,
+                            chess.C3, chess.D3, chess.E3, chess.F3]:
+        return " Prin aceasta mutare, calul obtine control asupra centrului tablei."
+    return " Aceasta mutare pregateste jocul pentru urmatoarele mutari strategice. Calul este o piesa esentiala in crearea de amenintari asupra regelui advers."
+
+
 
 
 if __name__ == "__main__":
     chatbot = ChatBot("Chatpot")
     stockfish = Stockfish(path="C:\stockfish\stockfish-windows-x86-64-avx2.exe")
     #train()
-    board = chess.Board("rnbqkbnr/p1p1pppp/3p4/1p4B1/3P4/8/PPP1PPPP/RN1QKBNR w KQkq - 0 1")
-    move = chess.Move.from_uci("g5d2")  # Mutarea de testat
-    explanation = get_explanation(board, move)
-    print(explanation)
-    #main()
+    #board = chess.Board("rnbqkbnr/p1p1pppp/3p4/1p4B1/3P4/8/PPP1PPPP/RN1QKBNR w KQkq - 0 1")
+    #move = chess.Move.from_uci("g5d2")  # Mutarea de testat
+    #explanation = get_explanation(board, move)
+    #print(explanation)
+    main()
 
 
 
