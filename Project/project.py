@@ -16,8 +16,6 @@ ALL_SQUARES = [chess.A1, chess.B1, chess.C1, chess.D1, chess.E1, chess.F1, chess
                 chess.A8, chess.B8, chess.C8, chess.D8, chess.E8, chess.F8, chess.G8, chess.H8]
 
 def parser():
-    white_wins = []
-    black_wins = []
     board = chess.Board()
     with open('games.txt', 'r') as f:
         lines = [line.strip() for line in f.readlines()]
@@ -107,7 +105,7 @@ def best_move_fen_configuration():
     user_input = input("Enter the FEN configuration: ")
     board = chess.Board(user_input)
     stockfish.set_fen_position(user_input)
-    for i in range(5):
+    for i in range(40):
         #board = chess.Board(user_input)
         if stockfish.is_fen_valid(user_input):
             #stockfish.set_fen_position(user_input)
@@ -115,10 +113,8 @@ def best_move_fen_configuration():
             best_move = chess.Move.from_uci(best_move_uci)
             explanation = get_explanation(board, best_move)
             print("\n\nBest move: ", best_move)
-            print("\n Best move: ", best_move_uci)
-            best_move = chess.Move.from_uci(best_move_uci)
+            # best_move = chess.Move.from_uci(best_move_uci)
             print("Explanation: ", explanation)
-
             print("Winning percentage: ", compute_winning_percentage(board, best_move))
             # make the best move on the board
             # actualize the board with the new move
@@ -152,8 +148,8 @@ def compute_winning_percentage(board, move):
         move_percentage = 'b' + move_percentage[2:]
     if board.piece_at(move.from_square).symbol() == 'r':
         move_percentage = 'r' + move_percentage[2:]
-
-    count = 1
+    
+    count = 0
     if board.turn:
         for game in white_wins:
             if move_percentage in game:
@@ -631,7 +627,7 @@ def get_explanation_of_captured_piece(captured_piece):
 if __name__ == "__main__":
     chatbot = ChatBot("Chatpot")
     stockfish = Stockfish(path="C:\stockfish\stockfish-windows-x86-64-avx2.exe")
-    train()
+    #train()
     # board = chess.Board("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1")
     # print(board.is_checkmate())
     # move = chess.Move.from_uci("a2a3")  # Mutarea de testat
