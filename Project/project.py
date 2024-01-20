@@ -5,7 +5,7 @@ from stockfish import Stockfish
 
 white_wins = []
 black_wins = []
-
+exit_conditions = (":q", "quit", "exit")
 ALL_SQUARES = [chess.A1, chess.B1, chess.C1, chess.D1, chess.E1, chess.F1, chess.G1, chess.H1,
                chess.A2, chess.B2, chess.C2, chess.D2, chess.E2, chess.F2, chess.G2, chess.H2,
                chess.A3, chess.B3, chess.C3, chess.D3, chess.E3, chess.F3, chess.G3, chess.H3,
@@ -17,7 +17,7 @@ ALL_SQUARES = [chess.A1, chess.B1, chess.C1, chess.D1, chess.E1, chess.F1, chess
 
 def parser():
     board = chess.Board()
-    with open('games.txt', 'r') as f:
+    with open('data/games.txt', 'r') as f:
         lines = [line.strip() for line in f.readlines()]
 
     games = [line.split(' ') for line in lines]
@@ -53,15 +53,13 @@ def parser():
         
  
 def train():
-
     trainer = ListTrainer(chatbot)
     trainer.train([
         "Hi",
         "Welcome, friend 🤗",
     ])
 
-
-    with open("training.yml", "r") as file:
+    with open("data/training.yml", "r") as file:
         line1 = file.readline().strip()
         line2 = file.readline().strip()
         while line1 and line2:         
@@ -70,12 +68,11 @@ def train():
             line2 = file.readline().strip()
 
 
-
 def main():
     print("\n\nWelcome friend 🤗!")
     while True:
-        print("How can i help you? (Enter the number)")
-        print("1. Show the best move. (fen configuration)")
+        print("\n\nHow can i help you? (Enter the number)")
+        print("1. Show the best move. (FEN configuration)")
         print("2. I have a question about the rules.")
         print("3. Exit.")
         choice = input("Your choice: ")
@@ -102,28 +99,30 @@ def rules_question():
     # TO DO: Train the chatbot with all the questions about the rules of chess
 
 def best_move_fen_configuration():
-    user_input = input("Enter the FEN configuration: ")
-    board = chess.Board(user_input)
-    stockfish.set_fen_position(user_input)
-    for i in range(40):
-        #board = chess.Board(user_input)
+    while True:
+        user_input = input("\nEnter the FEN configuration: ")
+        if user_input in exit_conditions:
+            break
+        board = chess.Board(user_input)
+        stockfish.set_fen_position(user_input)
+
         if stockfish.is_fen_valid(user_input):
-            #stockfish.set_fen_position(user_input)
-            best_move_uci = stockfish.get_best_move()
-            best_move = chess.Move.from_uci(best_move_uci)
-            explanation = get_explanation(board, best_move)
-            print("\n\nBest move: ", best_move)
-            # best_move = chess.Move.from_uci(best_move_uci)
-            print("Explanation: ", explanation)
-            print("Winning percentage: ", compute_winning_percentage(board, best_move))
-            # make the best move on the board
-            # actualize the board with the new move
-            stockfish.make_moves_from_current_position([best_move_uci])
-            board.push_san(best_move_uci)
-            print(board)
-            
+                best_move_uci = stockfish.get_best_move()
+                best_move = chess.Move.from_uci(best_move_uci)
+                explanation = get_explanation(board, best_move)
+                print("\nThe board before the move:")
+                print(board)
+                print("\nBest move: ", best_move)
+                print("Explanation: ", explanation)
+                print("Winning percentage: ", compute_winning_percentage(board, best_move))
+                stockfish.make_moves_from_current_position([best_move_uci])
+                board.push_san(best_move_uci)
+                print("New FEN configuration: ", board.fen())
+                print("\nThe board after the move: ")
+                print(board)
+                
         else:
-            print("Invalid FEN configuration!")
+                print("Invalid FEN configuration!")
     
 
 def compute_winning_percentage(board, move):
@@ -149,7 +148,7 @@ def compute_winning_percentage(board, move):
     if board.piece_at(move.from_square).symbol() == 'r':
         move_percentage = 'r' + move_percentage[2:]
     
-    count = 0
+    count = 1
     if board.turn:
         for game in white_wins:
             if move_percentage in game:
@@ -163,14 +162,13 @@ def compute_winning_percentage(board, move):
 
 
 
-
 def get_explanation(board, move):
 
     if board.is_checkmate():
         if board.turn:
-            return " Este sah mat. Piesele albe au castigat partida!"
+            return " Este sah mat. Albul a caștigat partida!"
         else:
-            return " Este sah mat. Piesele negre au castigat partida!"
+            return " Este sah mat. Negrul a caștigat partida!"
 
     if board.is_check():
         if board.turn:
@@ -206,7 +204,6 @@ def get_explanation(board, move):
     if board.is_en_passant(move):
         return "Ai capturat un pion en passant, eliminand o amenintare asupra pozitiei tale."
     
-    # TO DO: verify if the response make sense
     if board.is_castling(move):
         if board.is_kingside_castling(move):
             return "Aceasta mutare realizeaza o rocada de partea regelui, pozitionandu-l intr-o pozitie mai sigura."
@@ -219,8 +216,6 @@ def get_explanation(board, move):
         return f"Ai promovat un pion și ai obținut o nouă {promoted_piece}, ceea ce îți oferă un avantaj semnificativ."
     
     if board.is_capture(move):
-        # save in a variable the piece already placed at the destination of the move
-        print(move.to_square)
         captured_piece = board.piece_at(move.to_square)
         print(captured_piece.symbol())
         return get_explanation_of_captured_piece(captured_piece)
@@ -275,10 +270,7 @@ def get_explanation_black_pawn(board, move):
                 else:
                     return " Prin aceasta mutare, iti consolidezi pozitia in centru si pregatesti oportunitati de atac pe flanc."
             if move.from_square in [chess.F7] and move.to_square in [chess.F5, chess.F6]:
-                if board.piece_at(chess.E8) and board.piece_at(chess.E8).symbol() == 'q':
-                    return " Prin aceasta mutare, iti extinzi influența în centrul tablei și pregătești calea pentru o dezvoltare flexibilă a pieselor tale. Totodata, aceasta mutare deschide calea pentru regina de pe e8."
-                else:
-                    return " Prin aceasta mutare, iti extinzi influența în centrul tablei și pregătești calea pentru o dezvoltare flexibilă a pieselor tale."
+                return " Prin aceasta mutare, vei produce o presiune în centrul tablei și vei crea opțiuni de atac sau dezvoltare agresivă."
             if move.from_square in [chess.E7] and move.to_square in [chess.E5, chess.E6]:
                 if board.piece_at(chess.F8) and board.piece_at(chess.F8).symbol() == 'b' and board.piece_at(chess.D8) and board.piece_at(chess.D8).symbol() == 'k':
                     return " Prin această mutare îți extinzi influența în centrul tablei și creezi un suport puternic pentru dezvoltarea pieselor tale. Totodata, aceasta mutare deschide calea pentru rege si pentru nebunul de pe f8."
@@ -298,7 +290,10 @@ def get_explanation_black_pawn(board, move):
                 else:
                     return "Această mutare deschide calea pentru dezvoltarea pieselor tale, contribuind la controlul central și la ocuparea unui spațiu mai mare în mijlocul tablei."
             if move.from_square in [chess.C7] and move.to_square in [chess.C5, chess.C6]:
-                return " Prin aceasta mutare, vei produce o presiune în centrul tablei și vei crea opțiuni de atac sau dezvoltare agresivă."
+                if board.piece_at(chess.D8) and board.piece_at(chess.D8).symbol() == 'q':
+                    return " Prin aceasta mutare, iti extinzi influența în centrul tablei și pregătești calea pentru o dezvoltare flexibilă a pieselor tale. Totodata, aceasta mutare deschide calea pentru regina."
+                else:
+                    return " Prin aceasta mutare, iti extinzi influența în centrul tablei și pregătești calea pentru o dezvoltare flexibilă a pieselor tale."
             if move.from_square in [chess.B7] and move.to_square in [chess.B5, chess.B6]:
                 if board.piece_at(chess.C8) and board.piece_at(chess.C8).symbol() == 'b' and board.piece_at(chess.D8) and board.piece_at(chess.D8).symbol() == 'k':
                     return " Această mutare este o introducere în deschiderea Indiană de rege, pregătind terenul pentru dezvoltarea rapidă a nebunului și a regelui în spatele pionului de pe b7."
@@ -321,7 +316,7 @@ def get_explanation_white_pawn(board, move):
                     return " Prin aceasta mutare, iti consolidezi pozitia in centru si pregatesti oportunitati de atac pe flanc."
             if move.from_square in [chess.C2] and move.to_square in [chess.C3, chess.C4]:
                 if board.piece_at(chess.D1) and board.piece_at(chess.D1).symbol() == 'Q':
-                    return " Prin aceasta mutare, iti extinzi influența în centrul tablei și pregătești calea pentru o dezvoltare flexibilă a pieselor tale. Totodata, aceasta mutare deschide calea pentru regina de pe d1."
+                    return " Prin aceasta mutare, iti extinzi influența în centrul tablei și pregătești calea pentru o dezvoltare flexibilă a pieselor tale. Totodata, aceasta mutare deschide calea pentru regina."
                 else:
                     return " Prin aceasta mutare, iti extinzi influența în centrul tablei și pregătești calea pentru o dezvoltare flexibilă a pieselor tale."
             if move.from_square in [chess.D2] and move.to_square in [chess.D3, chess.D4]:
@@ -588,7 +583,7 @@ def get_explanation_black_queen(board, move):
         return " Regina este mutata intr-o pozitie ofensiva punand presiune pe regele advers, incercat sa produca un sah mat."
     return " Aceasta mutare pregateste jocul pentru urmatoarele mutari strategice. Calul este o piesa esentiala in crearea de amenintari asupra regelui advers."
 
-# create a function verify_if_move_will_be_check_or_checkmate(board,move) wich will return is move will produce a check or checkmate and return a string with the explanation
+
 def verify_if_move_will_be_check_or_checkmate(board,move):
     board.push(move)
     if board.is_checkmate():
@@ -627,7 +622,7 @@ def get_explanation_of_captured_piece(captured_piece):
 if __name__ == "__main__":
     chatbot = ChatBot("Chatpot")
     stockfish = Stockfish(path="C:\stockfish\stockfish-windows-x86-64-avx2.exe")
-    #train()
+    train()
     # board = chess.Board("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1")
     # print(board.is_checkmate())
     # move = chess.Move.from_uci("a2a3")  # Mutarea de testat
@@ -636,4 +631,6 @@ if __name__ == "__main__":
     # print(board)
     # print(compute_winning_percentage(board,move))
     parser()
+    # print(white_wins)
+    # print(black_wins)
     main()
