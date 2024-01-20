@@ -24,14 +24,19 @@ for game in games:
         else:
             black.append(move)
         board.push_san(move)
+        #mov = board.peek()
+ 
+        
         if len(white) > 5:
             white.pop(0)
         if len(black) > 5:
             black.pop(0)
+   
     if '#' in white[len(white) - 1]:
         white_moves.append(white)
     if '#' in black[len(black) - 1]:
         black_moves.append(black)
+    
 
 white_moves_freq = {}
 black_moves_freq = {}

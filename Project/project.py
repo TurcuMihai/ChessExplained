@@ -3,6 +3,9 @@ from chatterbot import ChatBot
 from chatterbot.trainers import ListTrainer
 from stockfish import Stockfish
 
+white_wins = []
+black_wins = []
+
 ALL_SQUARES = [chess.A1, chess.B1, chess.C1, chess.D1, chess.E1, chess.F1, chess.G1, chess.H1,
                chess.A2, chess.B2, chess.C2, chess.D2, chess.E2, chess.F2, chess.G2, chess.H2,
                chess.A3, chess.B3, chess.C3, chess.D3, chess.E3, chess.F3, chess.G3, chess.H3,
@@ -11,7 +14,46 @@ ALL_SQUARES = [chess.A1, chess.B1, chess.C1, chess.D1, chess.E1, chess.F1, chess
                 chess.A6, chess.B6, chess.C6, chess.D6, chess.E6, chess.F6, chess.G6, chess.H6,
                 chess.A7, chess.B7, chess.C7, chess.D7, chess.E7, chess.F7, chess.G7, chess.H7,
                 chess.A8, chess.B8, chess.C8, chess.D8, chess.E8, chess.F8, chess.G8, chess.H8]
-               
+
+def parser():
+    white_wins = []
+    black_wins = []
+    board = chess.Board()
+    with open('games.txt', 'r') as f:
+        lines = [line.strip() for line in f.readlines()]
+
+    games = [line.split(' ') for line in lines]
+    for game in games:
+        for i, move in enumerate(game):
+            game[i] = ''.join(char for char in move if char not in ['+', 'x'])
+
+    for game in games:
+        white = []
+        black = []
+        board.reset()
+        for move in game:
+            if len(move) > 2:
+                if board.turn:
+                    white.append(move)
+                else:
+                    black.append(move)
+                board.push_san(move)
+            else:
+                board.push_san(move)
+                current_move = board.peek()
+                if not board.turn:
+                    white.append(str(current_move))
+                else:
+                    black.append(str(current_move))
+                
+        if '#' in white[len(white) - 1]:
+            white[len(white) - 1] = white[len(white) - 1][:-1]
+            white_wins.append(white)
+        if '#' in black[len(black) - 1]:
+            black[len(black) - 1] = black[len(black) - 1][:-1]
+            black_wins.append(black)
+        
+ 
 def train():
 
     trainer = ListTrainer(chatbot)
@@ -25,7 +67,7 @@ def train():
         line1 = file.readline().strip()
         line2 = file.readline().strip()
         while line1 and line2:         
-            trainer.train([line2, line1,])
+            trainer.train([line1, line2,])
             line1 = file.readline().strip()
             line2 = file.readline().strip()
 
@@ -65,7 +107,7 @@ def best_move_fen_configuration():
     user_input = input("Enter the FEN configuration: ")
     board = chess.Board(user_input)
     stockfish.set_fen_position(user_input)
-    for i in range(40):
+    for i in range(5):
         #board = chess.Board(user_input)
         if stockfish.is_fen_valid(user_input):
             #stockfish.set_fen_position(user_input)
@@ -76,6 +118,8 @@ def best_move_fen_configuration():
             print("\n Best move: ", best_move_uci)
             best_move = chess.Move.from_uci(best_move_uci)
             print("Explanation: ", explanation)
+
+            print("Winning percentage: ", compute_winning_percentage(board, best_move))
             # make the best move on the board
             # actualize the board with the new move
             stockfish.make_moves_from_current_position([best_move_uci])
@@ -85,6 +129,44 @@ def best_move_fen_configuration():
         else:
             print("Invalid FEN configuration!")
     
+
+def compute_winning_percentage(board, move):
+    move_percentage = str(move)
+    if board.piece_at(move.from_square).symbol() == 'K':
+        move_percentage = 'K' + move_percentage[2:]
+    if board.piece_at(move.from_square).symbol() == 'Q':
+        move_percentage = 'Q' + move_percentage[2:]
+    if board.piece_at(move.from_square).symbol() == 'N':
+        move_percentage = 'N' + move_percentage[2:]
+    if board.piece_at(move.from_square).symbol() == 'B':
+        move_percentage = 'B' + move_percentage[2:]
+    if board.piece_at(move.from_square).symbol() == 'R':
+        move_percentage = 'R' + move_percentage[2:]
+    if board.piece_at(move.from_square).symbol() == 'k':
+        move_percentage = 'k' + move_percentage[2:]
+    if board.piece_at(move.from_square).symbol() == 'q':
+        move_percentage = 'q' + move_percentage[2:]
+    if board.piece_at(move.from_square).symbol() == 'n':
+        move_percentage = 'n' + move_percentage[2:]
+    if board.piece_at(move.from_square).symbol() == 'b':
+        move_percentage = 'b' + move_percentage[2:]
+    if board.piece_at(move.from_square).symbol() == 'r':
+        move_percentage = 'r' + move_percentage[2:]
+
+    count = 1
+    if board.turn:
+        for game in white_wins:
+            if move_percentage in game:
+                count +=1
+        return count / len(white_wins) * 100
+    else:
+        for game in black_wins:
+            if move_percentage in game:
+                count +=1
+        return count / len(black_wins) * 100
+
+
+
 
 def get_explanation(board, move):
 
@@ -549,11 +631,13 @@ def get_explanation_of_captured_piece(captured_piece):
 if __name__ == "__main__":
     chatbot = ChatBot("Chatpot")
     stockfish = Stockfish(path="C:\stockfish\stockfish-windows-x86-64-avx2.exe")
-    #train()
-    board = chess.Board("7k/3B4/8/4B3/3P1Q2/8/PPP2PPP/R3KB1R w KQkq - 1 6")
-    print(board.is_checkmate())
-    move = chess.Move.from_uci("f4f5")  # Mutarea de testat
-    explanation = get_explanation(board, move)
-    print(explanation)
-    print(board)
+    train()
+    # board = chess.Board("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1")
+    # print(board.is_checkmate())
+    # move = chess.Move.from_uci("a2a3")  # Mutarea de testat
+    # explanation = get_explanation(board, move)
+    # print(explanation)
+    # print(board)
+    # print(compute_winning_percentage(board,move))
+    parser()
     main()
