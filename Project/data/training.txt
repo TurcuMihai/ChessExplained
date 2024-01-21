@@ -1,0 +1,103 @@
+Ce inseamna promovarea pionului?
+Promovarea pionului are loc in momentul in care un pion ajunge pe ultima linie a tablei.
+Cand are loc promovarea pionului?
+Cand un pion ajunge pe ultima linie a tablei, acesta poate fi promovat in cal, nebun, regina sau turn.
+Cum are loc promovarea pionului?
+In momentul in care un pion ajunge pe ultima linie a tablei, acesta poate fi promovat in regina, nebun, turn sau cal.
+Spune despre promovarea pionului.
+Promovarea pionului consta in schimbarea unui pion cu o regina, un turn, un cal sau un nebun, in momentul in care acesta ajunge pe ultima linie a tablei.
+Care este regula de promovare a pionului in sah?
+Cand un pion ajunge pe ultima linie a tablei, acesta poate fi promovat in cal, nebun, regina sau turn.
+Cum pot sa promovez un pion?
+Poti promova un pion ajungand cu acesta pe ultima linie a tablei.
+Ce este regula de sah?
+Daca regele tau este amenintat de o pisa adversa. In situatia in care nu gasesti nicio modalitate de iesire din sah, este sah mat si pierzi jocul.
+Care este diferenta dintre sah si sah mat?
+Daca regele tau este pus in pericol de o piesa adversa este sah, iar daca nu exista nicio cale de scapare din aceasta situatie, atunci se considera ca este sah mat.
+Spune mi despre sah.
+Sahul este realizat in momentul in care regele este amenintat. Daca acesta nu poate fi aparat, este sah mat si adversarul a castigat.
+Cand este sah mat?
+In momentul in care regele este amenintat este considerat sah, iar daca acesta nu se poate apara, este sah mat.
+Cum se produce sahul?
+Sahul este produs atunci cand un rege este atacat. Daca acesta nu se poate apara, este sah mat.
+Ce imi poti spune despre sahul mat?
+Cand un rege este amenintat, inseamnca ca se afla in sah. Imposibilitatea apararii acestuia, duce la sah mat.
+Cate mutari speciale exista in sah?
+In sah, exista trei mutari speciale: en passant, rocada si promovarea.
+Explica rocada.
+Rocada este o regula care permite regelui și uneia dintre ture sa se miste simultan. Regele se deplaseaza 2 patrate spre tura, iar aceasta este mutata in patratul adiacent cu noua locatie a regelui.
+Ce se muta regele?
+Regele se poate muta cate un patrat in orice directie, exceptie facand la folosirea rocadei.
+Cum se muta regina?
+Regina se poate deplasa in orice directie, oricate patrate.
+Cum se muta calul?
+Un cal se poate deplasa la cele mai apropiate patrate care nu se afla pe aceeasi linie, coloana sau diagonala.
+Cum se muta nebunul?
+Un nebun poate muta orice numar de patrate in diagonala.
+Cum se muta pionul?
+Pentru prima mutare, un pion se poate deplasa inainte cu unul sau cu doua patrate, apoi doar cu cate unul. Pionii pot captura doar piese opuse care se afla in diagonala in fata lor.
+Cum se muta tura?
+Tura se poate misca inainte, inapoi, la stanga sau la dreapta, atata timp cat nu exista piese care sa-i obstructioneze calea.
+Ce miscari pot face cu o tura în sah?
+O tura se poate misca inainte, inapoi, la stanga sau la dreapta, atata timp cat nu exista piese care sa-i obstructioneze calea.
+Ce miscari pot face cu un nebun?
+Nebunul poate muta orice numar de patrate in diagonala.
+Cum se muta tura?
+Tura se poate misca inainte, inapoi, la stanga sau la dreapta, atata timp cat nu exista piese care sa-i obstructioneze calea.
+Ce este rocada?
+Rocada este o regula speciala de sah care permite regelui si uneia dintre ture sa se miste simultan. Regele se deplaseaza cu doua patrate spre turn, iar turnul se deplaseaza in careul adiacent patratului traversat de rege.
+Ce inseamna rocada?
+Rocada consta in mutarea regelui două patratele in directia turnului, urmata de miscarea turnului peste rege si asezarea lui langa el.
+Defineste conceptul de rocada.
+Rocada consta in deplasarea regelui pe distanta a doua patratele catre turn, urmata de transpunerea turnului deasupra regelui și amplasarea lui in imediata apropiere.
+Explica ce inseamna rocada.
+Miscarea de rocada incepe cu regele care se deplaseaza cu doua patratele catre turn, iar apoi turnul se muta peste rege si se aseaza in proximitatea acestuia.
+Descrie mutearea de rocada.
+Rocada inseamna miscarea simultana a regelui si a unui turn, cu conditia ca niciuna dintre aceste piese să nu fi fost mutată anterior în timpul partidei.
+Da-mi explicatia rocadei.
+Rocada implica deplasarea regelui cu doua patratele spre turn, urmat de miscarea turnului deasupra regelui si pozitionarea acestuia in apropiere.
+Explica ce este en passant.
+En passant este o regula in sah care permite capturarea unui pion advers aflat la doua patratele distanta, daca acesta a avansat de doua patratele si se afla langa pionul capturator. Mutarea trebuie facuta imediat dupa avansarea pionului advers.
+Cum se face en passant?
+Ce face en passant?
+En passant permite capturarea unui pion advers care a avansat de două patratele, mutandu-se langa pionul capturator. Mutarea de capturare trebuie facuta imediat dupa mutarea pionului advers.
+Ce este en passant?
+En passant permite capturarea unui pion advers care a avansat de două patratele, mutandu-se langa pionul capturator. Mutarea de capturare trebuie facuta imediat dupa mutarea pionului advers.
+Explica en passant.
+En passant permite capturarea unui pion advers care a avansat de două patratele, mutandu-se langa pionul capturator. Mutarea de capturare trebuie facuta imediat dupa mutarea pionului advers.
+In ce situatii este permisa capturarea en passant?
+Regulile permit capturarea en passant daca un pion advers se deplaseaza cu doua spatii, lasandu-l vulnerabil pentru o capturare imediata.
+Cand poate un jucator sa realizeze capturarea en passant?
+En passant inseamna capturarea imediata a unui pion advers care a avansat cu doua patratele si se afla in apropierea pionului capturator.
+Cand poate fi realizata capturarea en passant?
+In sah, en passant este o miscare speciala prin care poti captura un pion advers care a avansat de doua patratele si se afla in lateralul pionului tau.
+Cate mutari speciale are pionul?
+Pionul are doua mutari speciale: en passant si promovarea.
+Care sunt piesele jocului de sah?
+Piesele jocului de sah sunt: regii, turele, nebunii, reginele, caii si pionii.
+Ce se intampla in cazul sahului dublu?
+In cazul sahului dublu, cand sunt doua piese care ataca regele, doar mutarea regelui il poate scoate din sah.
+Cine muta primul in jocul de sah?
+Albul muta primul, ca in cele mai multe jocuri de tabla.
+Realizarea unei mutari este obligatorie?
+Realizarea unei mutari este obligatorie. Nu este permis sa se „paseze” mutarea.
+Pana cand continua jocul?
+Jocul continua pana cand un rege este in sah mat, un jucator cedeaza, sau se ajunge la remiza. In plus, daca se joaca cu controlul timpului, jucatorul care depaseste timpul limita pierde jocul.
+In ce consta regula mutarii pieselor?
+Daca un jucator a atins o piesa, acesta este obligat s-o mute, cu exceptia cazului in care piesa respectiva nu poate face nici o mutare legala.
+Am voie sa aranjez piesele?
+Daca un jucator are de gand sa atinga o piesa cu intentia de a o fixa mai bine in patratel, jucatorul trebuie intai sa-si anunte adversarul despre intentia sa spunand „aranjez”.
+Cum sunt identificate patratelele?
+Fiecare camp de pe tabla de sah este identificata cu un cuplu unic dintr-o litera si un numar. Sirurile verticale, denumite coloane, sunt marcate cu litere de la a la h, de la stanga albului (flancul damei) la dreapta albului (flancul regelui). Similar, sirurile orizontale, denumite linii, sunt numerotate de la 1 la 8, incepand de la orizontala de langa alb. Deci, fiecare patratel de pe tabla este identificat cu litera verticalei si numarul orizontalei.
+Cum este realizata cedarea?
+Orice jucator poate ceda oricand, iar in acest caz adversarul castiga jocul. Acest lucru are loc in mod normal cand jucătorul crede ca pierde partida. Un jucator poate ceda ori spunand asta, ori indicand pe tabelul cu scoruri in oricare din trei moduri: scriind „cedeaza” sau scriind „1—0” daca negrul cedeaza sau „0—1” daca albul cedeaza.
+Ce este patul?
+Jocul devine automat remiza daca regele nu este in sah, dar nu poate face nici o mutare legala. Aceasta situatie se numeste pat"
+Ce reprezinta controlul timpului in jocul de sah?
+O partida este jucata cu controlul timpului. Cea mai obisnuita metoda de control al timpului este urmatoarea: fiecare jucator are cate un ceas cu un buton pe el, ceasurile adversarilor sunt legate intre ele. Cand un jucator se gandeste la mutare ceasul sau merge, iar ceasul adversarului sta pe loc.
+Explica notatia algebrica.
+In jocul de sah, pionii sunt notati cu litera coloanei pe care se afla, calul este notat cu N, nebunul este notat cu B, tura este notata cu R, regina este notata cu Q, iar regele este reprezentat prin K. Semnul "=" inseamna promovare, "+" inseamna sah, iar "#" sugereaza sah mat.
+Care este notatia algebrica?
+In jocul de sah, pionii sunt notati cu litera coloanei pe care se afla, calul este notat cu N, nebunul este notat cu B, tura este notata cu R, regina este notata cu Q, iar regele este reprezentat prin K. Semnul "=" inseamna promovare, "+" inseamna sah, iar "#" sugereaza sah mat.
+Spune despte notatia algebrica.
+In jocul de sah, pionii sunt notati cu litera coloanei pe care se afla, calul este notat cu N, nebunul este notat cu B, tura este notata cu R, regina este notata cu Q, iar regele este reprezentat prin K. Semnul "=" inseamna promovare, "+" inseamna sah, iar "#" sugereaza sah mat.
