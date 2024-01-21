@@ -49,9 +49,10 @@ en passant:
 - - "Cum se numește fenomenul în care pionul jucătorului B capturează pionul jucătorului A după ce acesta a mutat două pătrățele?"
   - "Dacă pionul jucătorului A mută două pătrățele și pionul jucătorului B are un pion pe a cincea linie și pe linia vecină, pionul lui B poate captura pionul lui A ca și cum pionul lui A a mutat doar un pătrățel."
 # Rocada
+
+#PRIMUL:
 - - "Ce înseamnă rocada?"
   - "Rocada constă în mutarea regelui două pătrățele în direcția turnului, urmată de mișcarea turnului peste rege și așezarea lui lângă el."
-# Cand este permisa rocada?
 - - "Când este permisă rocada?"
   - " Rocada este permisă doar dacă următoarele condiții sunt respectate: Regele și turnul înainte de a efectua rocada nu au făcut alte mutări; Nu sunt piese între rege și turn; Regele nu este în poziție de șah, pătrățelele pe care mută regele și turnul nu sunt atacate; Regele și turnul sunt pe aceeași linie."
 - - "Când poate fi facută capturarea en passant?"
@@ -70,6 +71,8 @@ en passant:
   - "Piesele jocului de sah sunt: regele, turnul, nebunul, dama, calul si pionii"
 - - "Cum se mută regele?"
   - "Regele poate muta exact un pătrățel pe orizontală, verticală sau diagonală. De asemenea, fiecare rege poate face o mutare specială, numită rocadă, o singură dată în cursul unei partide."
+
+#AL DOILEA:
 - - "Cum se mută turnul?"
   - "Turnul mută orice număr de pătrățele libere pe verticală sau orizontală. De asemenea este deplasat și la rocadă."
 - - "Cum se mută nebunul?"
@@ -90,6 +93,8 @@ en passant:
   - "Realizarea unei mutări este obligatorie, nu este permis să se „paseze”."
 - - "Până când continuă jocul?"
   - "Jocul continuă până când un rege este mat, un jucător cedează, sau se ajunge la remiză. În plus, dacă se joacă cu controlul timpului, jucătorul care depășește timpul limită pierde jocul."
+
+#AL TREILEA:  
 - - "Cum sunt identificate pătrățelele?"
   - "Fiecare câmp de pe tabla de șah este identificat cu un cuplu unic dintr-o literă și un număr. Șirurile verticale, denumite coloane, sunt marcate cu litere de la a la h, de la stânga albului (flancul damei) la dreapta albului (flancul regelui). Similar, șirurile orizontale, denumite linii, sunt numerotate de la 1 la 8, începând de la orizontala de lângă alb. Deci, fiecare pătrățel de pe tablă este identificat cu litera verticalei și numărul orizontalei. Regele alb, de exemplu, începe jocul de pe pătrățelul e1, iar un cal negru de pe b8, de unde poate muta pe a6 sau c6."
 - - "Cum este jucat șahul?"
@@ -116,8 +121,9 @@ en passant:
   - "O partidă este jucată cu controlul timpului. Cea mai obișnuită metodă de control al timpului este următoarea: fiecare jucător are câte un ceas cu un buton pe el, ceasurile adversarilor sunt legate între ele. Când un jucător se gândește la mutare ceasul său merge, iar ceasul adversarului stă pe loc, după ce jucătorul respectiv mută, el apasă pe ceasul său, în felul acesta oprește ceasul său și îl pornește pe al adversarului. Primul care apasă pe ceas este negrul. Jucătorul căruia îi expiră timpul pierde partida."
 - - "Ce reprezintă controlul timpului în jocul de șah?"
   - "O partidă este jucată cu controlul timpului. Cea mai obișnuită metodă de control al timpului este următoarea: fiecare jucător are câte un ceas cu un buton pe el, ceasurile adversarilor sunt legate între ele. Când un jucător se gândește la mutare ceasul său merge, iar ceasul adversarului stă pe loc, după ce jucătorul respectiv mută, el apasă pe ceasul său, în felul acesta oprește ceasul său și îl pornește pe al adversarului. Primul care apasă pe ceas este negrul. Jucătorul căruia îi expiră timpul pierde partida."
-- - "Cum se mută piesele?"
-  - "Mutarea pieselor este făcută cu o mână. După ce jucătorul pune mâna pe o piesă, jucătorul este obligat să joace cu piesa respectivă (dacă are o mutare legală). Când este rocadă, jucătorul trebuie întâi să meargă cu regele cu o mână și apoi să miște turnul cu aceeași mână."
+
+#AL PATRULEA:
+
 - - "In ce constă regula mutării pieselor?"
   - "Dacă un jucător a atins o piesă, acesta este obligat s-o mute, cu excepția cazului în care piesa respectivă nu poate face nici o mutare legală. Dacă jucătorul a atins o piesă a adversarului atunci acesta este obligat să o captureze în cazul în care aceasta poate fi capturată. Dacă nici una din piesele atinse nu pot fi mutate sau capturate nu se penalizează, ci se permite mutarea cu altă piesă."
 - - "Cum se ating piesele la rocadă?"

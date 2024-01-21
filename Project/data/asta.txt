@@ -1,0 +1,91 @@
+Ce inseamna promovarea pionului?
+Promovarea pionului are loc in momentul in care un pion ajunge pe ultima linie a tablei.
+Cand are loc promovarea pionului?
+Cand un pion ajunge pe ultima linie a tablei, acesta poate fi promovat in cal, nebun, regina sau turn.
+Cum are loc promovarea pionului?
+In momentul in care un pion ajunge pe ultima linie a tablei, acesta poate fi promovat in regina, nebun, turn sau cal.
+Spune despre promovarea pionului.
+Promovarea pionului consta in schimbarea unui pion cu o regina, un turn, un cal sau un nebun, in momentul in care acesta ajunge pe ultima linie a tablei.
+Care este regula de promovare a pionului in sah?
+Cand un pion ajunge pe ultima linie a tablei, acesta poate fi promovat in cal, nebun, regina sau turn.
+Cum pot sa promovez un pion?
+Poti promova un pion ajungand cu acesta pe ultima linie a tablei.
+Ce este regula de sah?
+Daca regele tau este amenintat de o pisa adversa. In situatia in care nu gasesti nicio modalitate de iesire din sah, este sah mat si pierzi jocul.
+Care este diferenta dintre sah si sah mat?
+Daca regele tau este pus in pericol de o piesa adversa este sah, iar daca nu exista nicio cale de scapare din aceasta situatie, atunci se considera ca este sah mat.
+Spune mi despre sah.
+Sahul este realizat in momentul in care regele este amenintat. Daca acesta nu poate fi aparat, este sah mat si adversarul a castigat.
+Cand este sah mat?
+In momentul in care regele este amenintat este considerat sah, iar daca acesta nu se poate apara, este sah mat.
+Cum se produce sahul?
+Sahul este produs atunci cand un rege este atacat. Daca acesta nu se poate apara, este sah mat.
+Ce imi poti spune despre sahul mat?
+Cand un rege este amenintat, inseamnca ca se afla in sah. Imposibilitatea apararii acestuia, duce la sah mat.
+
+
+
+Cum se misca tura in șah?
+O tură se poate mișca înainte, înapoi, la stânga sau la dreapta, atâta timp cât nu există piese care să-i obstrucționeze calea.
+Ce este rocada?
+Rocada este o regulă specială de șah care permite regelui și uneia dintre turne să se miște simultan. Rocarea este singura mutare care permite regelui și turnului să se deplaseze „prin” unul pe altul. Regele se deplasează cu două pătrate spre turn, iar turnul se deplasează în careul adiacent pătratului traversat de regele.
+
+
+
+
+
+Ce mișcări pot face cu regele la șah?
+Un rege se poate mișca un pătrat în orice direcție. Rocarea este o mișcare specială a regelui care îi permite regelui să miște două pătrate spre o turnă, iar apoi turnul se mută în careul pe care a traversat-o regele.
+ 
+Ce mișcări pot face cu regele la șah?
+Regele se poate deplasa și pentru a captura o piesă, dar această mișcare nu este permisă dacă piesa capturată este un cavaler sau un pion.
+ 
+
+Poate regele să se miște în șah mat?
+Nu, la șah, regele nu se poate mișca în șah mat. Regele este atacat și nu se poate muta într-un pătrat sigur.
+ 
+Ce mișcări pot face cu o regină la șah?
+O regină se poate deplasa în orice direcție de-a lungul unui rang, fișier sau diagonală pentru orice număr de pătrate. De asemenea, se poate mișca în diagonală într-un anumit model, cunoscut sub numele de diagonală. În plus, o regină poate captura piesa unui adversar deplasându-se în careul ocupat de piesa adversarului și înlocuind-o pe careul său.
+ 
+Ce mișcări pot face cu calul la șah?
+Un cal se poate deplasa la cele mai apropiate pătrate care nu se află pe aceeași linie, coloană sau diagonală.
+ 
+Ce mișcări pot face cu un nebun la șah?
+Un episcop poate muta orice număr de pătrate în diagonală.
+ 
+Ce mișcări pot face cu un pion în șah?
+Un pion se poate deplasa înainte cu unul sau două pătrate din poziția sa de pornire sau poate captura în diagonală cu un pătrat înainte. Pentru prima mutare, un pion se poate deplasa înainte cu două pătrate. Pionii pot captura doar piese opuse care se află în diagonală în fața lor.
+ 
+Ce miscari speciale exista in sah?
+Există trei mișcări speciale în șah: en pasand, roca și promovare. Când un pion înaintează cu două pătrate din poziția sa inițială și aterizează lângă un pion inamic, acesta poate fi capturat ca și cum s-ar fi deplasat doar cu un pătrat înainte. Rocarea este o mișcare specială care implică regele și unul dintre turle. Este singura mutare care îi permite regelui să miște mai mult de un pătrat. Promovarea are loc atunci când un pion ajunge la capătul opus al tablei și o nouă regină, turnă, episcop sau cavaler este ales pentru a-l înlocui.
+ 
+
+
+
+Ce miscari pot face cu o tura în sah?
+O tura se poate misca inainte, inapoi, la stanga sau la dreapta, atata timp cat nu exista piese care sa-i obstructioneze calea.
+
+Explica rocada.
+Rocada este o regula care permite regelui și uneia dintre ture sa se miste simultan. Regele se deplaseaza 2 patrate spre tura, iar aceasta este mutata in patratul adiacent cu noua locatie a regelui.
+
+Cum se muta regina?
+Regina se poate deplasa in orice directie, oricate patrate.
+
+Cum se muta calul?
+Un cal se poate deplasa la cele mai apropiate patrate care nu se afla pe aceeasi linie, coloana sau diagonala.
+
+Ce miscari pot face cu un nebun?
+Nebunul poate muta orice numar de patrate in diagonala.
+
+Cum se muta nebunul?
+Un nebun poate muta orice numar de patrate in diagonala.
+
+Cum se muta pionul?
+Pentru prima mutare, un pion se poate deplasa inainte cu unul sau cu doua patrate, apoi doar cu cate unul. Pionii pot captura doar piese opuse care se afla in diagonala in fata lor.
+
+
+Cum se muta tura?
+Tura se poate misca inainte, inapoi, la stanga sau la dreapta, atata timp cat nu exista piese care sa-i obstructioneze calea.
+
+Ce este rocada?
+Rocada este o regula speciala de sah care permite regelui si uneia dintre ture sa se miste simultan. Regele se deplaseaza cu doua patrate spre turn, iar turnul se deplaseaza in careul adiacent patratului traversat de rege.

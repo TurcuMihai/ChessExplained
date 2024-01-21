@@ -5,7 +5,9 @@ from stockfish import Stockfish
 
 white_wins = []
 black_wins = []
-exit_conditions = (":q", "quit", "exit")
+all_games_white = []
+all_games_black = []
+exit_conditions = (":q", "quit", "exit","stop","Exit","Stop","Quit","Q","q","STOP","QUIT","EXIT")
 ALL_SQUARES = [chess.A1, chess.B1, chess.C1, chess.D1, chess.E1, chess.F1, chess.G1, chess.H1,
                chess.A2, chess.B2, chess.C2, chess.D2, chess.E2, chess.F2, chess.G2, chess.H2,
                chess.A3, chess.B3, chess.C3, chess.D3, chess.E3, chess.F3, chess.G3, chess.H3,
@@ -19,18 +21,18 @@ def parser():
     board = chess.Board()
     with open('data/games.txt', 'r') as f:
         lines = [line.strip() for line in f.readlines()]
-
     games = [line.split(' ') for line in lines]
+
     for game in games:
         for i, move in enumerate(game):
-            game[i] = ''.join(char for char in move if char not in ['+', 'x'])
+            game[i] = ''.join(char for char in move if char not in ['+'])
 
     for game in games:
         white = []
         black = []
         board.reset()
         for move in game:
-            if len(move) > 2:
+            if len(move) > 2 and move[0] not in ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']:
                 if board.turn:
                     white.append(move)
                 else:
@@ -43,15 +45,28 @@ def parser():
                     white.append(str(current_move))
                 else:
                     black.append(str(current_move))
-                
         if '#' in white[len(white) - 1]:
             white[len(white) - 1] = white[len(white) - 1][:-1]
             white_wins.append(white)
+        all_games_white.append(white)
         if '#' in black[len(black) - 1]:
             black[len(black) - 1] = black[len(black) - 1][:-1]
             black_wins.append(black)
-        
- 
+        all_games_black.append(black)
+
+    for game in white_wins:
+        for i, move in enumerate(game):
+            game[i] = ''.join(char for char in move if char not in ['+', 'x'])
+    for game in black_wins:
+        for i, move in enumerate(game):
+            game[i] = ''.join(char for char in move if char not in ['+', 'x'])
+    for game in all_games_black:
+        for i, move in enumerate(game):
+            game[i] = ''.join(char for char in move if char not in ['+', 'x'])
+    for game in all_games_white:
+            for i, move in enumerate(game):
+                game[i] = ''.join(char for char in move if char not in ['+', 'x'])
+
 def train():
     trainer = ListTrainer(chatbot)
     trainer.train([
@@ -59,7 +74,7 @@ def train():
         "Welcome, friend 🤗",
     ])
 
-    with open("data/training.yml", "r") as file:
+    with open("data/asta.txt", "r") as file:
         line1 = file.readline().strip()
         line2 = file.readline().strip()
         while line1 and line2:         
@@ -69,28 +84,28 @@ def train():
 
 
 def main():
-    print("\n\nWelcome friend 🤗!")
+    print("\n\nBine ai venit! 🤗")
     while True:
-        print("\n\nHow can i help you? (Enter the number)")
-        print("1. Show the best move. (FEN configuration)")
-        print("2. I have a question about the rules.")
-        print("3. Exit.")
-        choice = input("Your choice: ")
+        print("\n\nCu ce te pot ajuta astazi? 🥰")
+        print("1. Vreau mutarea optima pentru o configuratie FEN. 😎")
+        print("2. Am o intrebare legata de regulamentul sahului. 😏")
+        print("3. Iesire. 😪")
+        choice = input("Alege o optiune: ")
 
         if choice == "1":
             best_move_fen_configuration()
         elif choice == "2":
             rules_question()
         elif choice == "3":
-            print("Goodbye!")
+            print("O zi buna! 🤗")
             break
         else:
-            print("Invalid choice!")
+            print("Alegere invalida!")
 
 
 def rules_question():
     exit_conditions = (":q", "quit", "exit")
-    print("🪴 How can I help you?")
+    print("🧐 Cu ce te pot ajuta? ")
     while True:
         user_input = input("> ")
         if user_input in exit_conditions:
@@ -100,65 +115,85 @@ def rules_question():
 
 def best_move_fen_configuration():
     while True:
-        user_input = input("\nEnter the FEN configuration: ")
+        user_input = input("\nIntrodu o configuratie FEN valida: ")
         if user_input in exit_conditions:
             break
         board = chess.Board(user_input)
         stockfish.set_fen_position(user_input)
-
         if stockfish.is_fen_valid(user_input):
-                best_move_uci = stockfish.get_best_move()
-                best_move = chess.Move.from_uci(best_move_uci)
-                explanation = get_explanation(board, best_move)
-                print("\nThe board before the move:")
-                print(board)
-                print("\nBest move: ", best_move)
-                print("Explanation: ", explanation)
-                print("Winning percentage: ", compute_winning_percentage(board, best_move))
-                stockfish.make_moves_from_current_position([best_move_uci])
-                board.push_san(best_move_uci)
-                print("New FEN configuration: ", board.fen())
-                print("\nThe board after the move: ")
-                print(board)
-                
+            best_move_uci = stockfish.get_best_move()
+            best_move = chess.Move.from_uci(best_move_uci)
+            explanation = get_explanation(board, best_move)
+            print("\nTabla inainte de mutare:")
+            print(board)
+            print("\nCea mai buna mutare: ", best_move)
+            print("Explicatie: ", explanation)
+            # TO DO: add message about the winning percentage
+            print("Winning percentage: ", f"{compute_winning_percentage(board, best_move)}%")
+            stockfish.make_moves_from_current_position([best_move_uci])
+            board.push_san(best_move_uci)
+            print("Noua configuratie ", board.fen())
+            print("\nTabla dupa realizarea mutarii: ")
+            print(board)   
         else:
-                print("Invalid FEN configuration!")
+            print("Configuratie invalida!")
     
 
 def compute_winning_percentage(board, move):
     move_percentage = str(move)
-    if board.piece_at(move.from_square).symbol() == 'K':
+    if board. piece_at(move.from_square) and board.piece_at(move.from_square).symbol() == 'K':
         move_percentage = 'K' + move_percentage[2:]
-    if board.piece_at(move.from_square).symbol() == 'Q':
+    if board. piece_at(move.from_square) and board.piece_at(move.from_square).symbol() == 'Q':
         move_percentage = 'Q' + move_percentage[2:]
-    if board.piece_at(move.from_square).symbol() == 'N':
+    if board. piece_at(move.from_square) and board.piece_at(move.from_square).symbol() == 'N':
         move_percentage = 'N' + move_percentage[2:]
-    if board.piece_at(move.from_square).symbol() == 'B':
+    if board. piece_at(move.from_square) and board.piece_at(move.from_square).symbol() == 'B':
         move_percentage = 'B' + move_percentage[2:]
-    if board.piece_at(move.from_square).symbol() == 'R':
+    if board. piece_at(move.from_square) and board.piece_at(move.from_square).symbol() == 'R':
         move_percentage = 'R' + move_percentage[2:]
-    if board.piece_at(move.from_square).symbol() == 'k':
-        move_percentage = 'k' + move_percentage[2:]
-    if board.piece_at(move.from_square).symbol() == 'q':
-        move_percentage = 'q' + move_percentage[2:]
-    if board.piece_at(move.from_square).symbol() == 'n':
-        move_percentage = 'n' + move_percentage[2:]
-    if board.piece_at(move.from_square).symbol() == 'b':
-        move_percentage = 'b' + move_percentage[2:]
-    if board.piece_at(move.from_square).symbol() == 'r':
-        move_percentage = 'r' + move_percentage[2:]
-    
-    count = 1
+    if board. piece_at(move.from_square) and board.piece_at(move.from_square).symbol() == 'k':
+        move_percentage = 'K' + move_percentage[2:]
+    if board. piece_at(move.from_square) and board.piece_at(move.from_square).symbol() == 'q':
+        move_percentage = 'Q' + move_percentage[2:]
+    if board. piece_at(move.from_square) and board.piece_at(move.from_square).symbol() == 'n':
+        move_percentage = 'N' + move_percentage[2:]
+    if board. piece_at(move.from_square) and board.piece_at(move.from_square).symbol() == 'b':
+        move_percentage = 'B' + move_percentage[2:]
+    if board. piece_at(move.from_square) and board.piece_at(move.from_square).symbol() == 'r':
+        move_percentage = 'R' + move_percentage[2:]
+    if move.from_square == chess.E1 and move.to_square == chess.G1 and board.piece_at(move.from_square).symbol() == 'K':
+        move_percentage = 'O-O'
+    if move.from_square == chess.E1 and move.to_square == chess.C1 and board.piece_at(move.from_square).symbol() == 'K':
+        move_percentage = 'O-O-O'
+    if move.from_square == chess.E8 and move.to_square == chess.G8 and board.piece_at(move.from_square).symbol() == 'k':
+        move_percentage = 'O-O'
+    if move.from_square == chess.E8 and move.to_square == chess.C8 and board.piece_at(move.from_square).symbol() == 'k':
+        move_percentage = 'O-O-O'
+    print(move_percentage)
+    move_apparitions_in_wins = 0
+    move_apparitions = 0
     if board.turn:
         for game in white_wins:
             if move_percentage in game:
-                count +=1
-        return count / len(white_wins) * 100
+                move_apparitions_in_wins +=1
+        for game in all_games_white:
+            if move_percentage in game:
+                move_apparitions +=1
+        if move_apparitions == 0:
+            return "Nedefinit"
+        else:
+            return round(move_apparitions_in_wins / move_apparitions * 100, 2)
     else:
         for game in black_wins:
             if move_percentage in game:
-                count +=1
-        return count / len(black_wins) * 100
+                move_apparitions_in_wins +=1
+        for game in all_games_black:
+            if move_percentage in game:
+                move_apparitions +=1
+        if move_apparitions == 0:
+            return "Nedefinit"
+        else:
+            return round(move_apparitions_in_wins / move_apparitions * 100, 2)
 
 
 
@@ -166,15 +201,15 @@ def get_explanation(board, move):
 
     if board.is_checkmate():
         if board.turn:
-            return " Este sah mat. Albul a caștigat partida!"
+            return " Este sah mat. Albul a castigat partida!"
         else:
-            return " Este sah mat. Negrul a caștigat partida!"
+            return " Este sah mat. Negrul a castigat partida!"
 
     if board.is_check():
         if board.turn:
-            return " Esti in sah. Albul trebuie sa faca aceasta mutare pentru a se apara."
+            return " Este sah. Albul trebuie sa faca aceasta mutare pentru a se apara."
         else:
-            return " Esti in sah. Negrul trebuie sa faca aceasta mutare pentru a se apara."
+            return " Este sah. Negrul trebuie sa faca aceasta mutare pentru a se apara."
 
     if board.is_stalemate():
         return " Partida s-a incheiat la egalitate!"
@@ -199,25 +234,20 @@ def get_explanation(board, move):
             return " Cu aceasta mutare, negrul va produce sah mat."
         elif response == "Check":
             return " Cu aceasta mutare, negrul va produce sah."
-    
-    # TO DO: verify why en passant is not working
-    if board.is_en_passant(move):
-        return "Ai capturat un pion en passant, eliminand o amenintare asupra pozitiei tale."
-    
+
     if board.is_castling(move):
         if board.is_kingside_castling(move):
-            return "Aceasta mutare realizeaza o rocada de partea regelui, pozitionandu-l intr-o pozitie mai sigura."
+            return " Realizeaza o rocada de partea regelui, pozitionandu-l mai in siguranta."
         elif board.is_queenside_castling(move):
-            return "Aceasta mutare realizeaza o rocada de partea reginei, pozitionand regele intr-o pozitie mai sigura."
+            return " Realizeaza o rocada de partea reginei, pozitionand regele mai in siguranta."
 
     if move.promotion:
         promoted_piece = chess.piece_name(move.promotion).lower()
         # TO DO: VARIATII ALE PROPOZITIEI IN FUNCTIE DE PIESA PROMOVATA
-        return f"Ai promovat un pion și ai obținut o nouă {promoted_piece}, ceea ce îți oferă un avantaj semnificativ."
+        return f" Ai promovat un pion și ai obținut o nouă {promoted_piece}, ceea ce îți oferă un avantaj semnificativ."
     
     if board.is_capture(move):
         captured_piece = board.piece_at(move.to_square)
-        print(captured_piece.symbol())
         return get_explanation_of_captured_piece(captured_piece)
 
     if board.piece_at(move.from_square).symbol() == 'P':
@@ -245,15 +275,13 @@ def get_explanation(board, move):
     elif board.piece_at(move.from_square).symbol() == 'q':
         return get_explanation_black_queen(board, move)
     else:
-        return "Ai realizat o mutare strategică care îți oferă control asupra centrului tablei și te pregătește pentru etapele ulterioare ale partidei."
-
+        return "Ai realizat o mutare strategica care iti ofera control asupra centrului tablei si te pregateste pentru etapele urmatoare ale partidei."
 
 
 def get_explanation_black_king(board, move):
     if move.from_square in [chess.A8, chess.B8, chess.C8, chess.D8, chess.E8, chess.F8, chess.G8, chess.H8, chess.A7, chess.B7, chess.C7, chess.D7, chess.E7, chess.F7, chess.G7, chess.H7, chess.A6, chess.B6, chess.C6, chess.D6, chess.E6, chess.F6, chess.G6, chess.H6] and move.to_square in [chess.A8, chess.B8, chess.C8, chess.D8, chess.E8, chess.F8, chess.G8, chess.H8, chess.A7, chess.B7, chess.C7, chess.D7, chess.E7, chess.F7, chess.G7, chess.H7]:
-        return "Prin aceasta mutare asiguri o pozitie mai sigura regelui tau."
-    return " Prin aceasta mutare, regele joaca un rol mai activ in capturarea de pioni sau in limitarea mobilitatii regelui advers."    
-
+        return " Asigura o pozitie mai sigura regelui."
+    return " Regele joaca un rol mai activ in capturarea de pioni sau in limitarea mobilitatii regelui advers."    
 
 def get_explanation_white_king(board, move):
     if move.from_square in [chess.A1, chess.B1, chess.C1, chess.D1, chess.E1, chess.F1, chess.G1, chess.H1, chess.A2, chess.B2, chess.C2, chess.D2, chess.E2, chess.F2, chess.G2, chess.H2, chess.A3, chess.B3, chess.C3, chess.D3, chess.E3, chess.F3, chess.G3, chess.H3] and move.to_square in [chess.A1, chess.B1, chess.C1, chess.D1, chess.E1, chess.F1, chess.G1, chess.H1, chess.A2, chess.B2, chess.C2, chess.D2, chess.E2, chess.F2, chess.G2, chess.H2]:
@@ -623,14 +651,64 @@ if __name__ == "__main__":
     chatbot = ChatBot("Chatpot")
     stockfish = Stockfish(path="C:\stockfish\stockfish-windows-x86-64-avx2.exe")
     train()
-    # board = chess.Board("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1")
-    # print(board.is_checkmate())
-    # move = chess.Move.from_uci("a2a3")  # Mutarea de testat
+    parser()
+    main()
+
+    # board = chess.Board("r1bqkbnr/p2ppppp/8/8/1Pp5/8/P1P1PPPP/RNBQKBNR w KQkq - 0 1")
+    # move = chess.Move.from_uci("e2h3")
     # explanation = get_explanation(board, move)
     # print(explanation)
     # print(board)
+    # board.push(move)
+    # print(board.fen())
     # print(compute_winning_percentage(board,move))
-    parser()
-    # print(white_wins)
-    # print(black_wins)
-    main()
+    # parser()
+    # # print(white_wins)
+    # # print(black_wins)
+
+
+
+
+
+
+
+
+
+
+# def parser():
+#     board = chess.Board()
+#     with open('data/games.txt', 'r') as f:
+#         lines = [line.strip() for line in f.readlines()]
+
+#     games = [line.split(' ') for line in lines]
+#     for game in games:
+#         for i, move in enumerate(game):
+#             game[i] = ''.join(char for char in move if char not in ['+', 'x'])
+
+#     for game in games:
+#         white = []
+#         black = []
+#         board.reset()
+#         for move in game:
+#             if len(move) > 2:
+#                 if board.turn:
+#                     white.append(move)
+#                 else:
+#                     black.append(move)
+#                 board.push_san(move)
+#             else:
+#                 board.push_san(move)
+#                 current_move = board.peek()
+#                 if not board.turn:
+#                     white.append(str(current_move))
+#                 else:
+#                     black.append(str(current_move))
+                
+#         if '#' in white[len(white) - 1]:
+#             white[len(white) - 1] = white[len(white) - 1][:-1]
+#             white_wins.append(white)
+#         if '#' in black[len(black) - 1]:
+#             black[len(black) - 1] = black[len(black) - 1][:-1]
+#             black_wins.append(black)
+        
+ 
