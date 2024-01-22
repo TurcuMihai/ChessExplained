@@ -59,7 +59,6 @@ Rocada implica deplasarea regelui cu doua patratele spre turn, urmat de miscarea
 Explica ce este en passant.
 En passant este o regula in sah care permite capturarea unui pion advers aflat la doua patratele distanta, daca acesta a avansat de doua patratele si se afla langa pionul capturator. Mutarea trebuie facuta imediat dupa avansarea pionului advers.
 Cum se face en passant?
-Ce face en passant?
 En passant permite capturarea unui pion advers care a avansat de două patratele, mutandu-se langa pionul capturator. Mutarea de capturare trebuie facuta imediat dupa mutarea pionului advers.
 Ce este en passant?
 En passant permite capturarea unui pion advers care a avansat de două patratele, mutandu-se langa pionul capturator. Mutarea de capturare trebuie facuta imediat dupa mutarea pionului advers.

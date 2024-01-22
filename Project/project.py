@@ -122,29 +122,29 @@ def best_move_fen_configuration():
         stockfish.set_fen_position(user_input)
         for i in range(40):
             if stockfish.is_fen_valid(user_input):
-                best_move_uci = stockfish.get_best_move()
-                best_move = chess.Move.from_uci(best_move_uci)
-                explanation = get_explanation(board, best_move)
-                print("\nTabla inainte de mutare:")
-                print(board)
-                print("\nCea mai buna mutare: ", best_move)
-                print("Explicatie: ", explanation)
-                winning_percentage = compute_winning_percentage(board, best_move)
-                if winning_percentage < 40 or winning_percentage == "Nedefinit":
-                    print(f"Aceasta mutare este una obisnuita. ({winning_percentage}%)")
-                elif winning_percentage < 50:
-                    print(f"Este o mutare buna. ({winning_percentage}%)")
-                elif winning_percentage < 60:
-                    print(f"Este o mutare foarte buna. ({winning_percentage}%)")
-                else:
-                    print(f"Aceasta mutare iti ofera sanse mari de castig. ({winning_percentage}%)")
-                stockfish.make_moves_from_current_position([best_move_uci])
-                board.push_san(best_move_uci)
-                print("Noua configuratie ", board.fen())
-                print("\nTabla dupa realizarea mutarii: ")
-                print(board)   
+                    best_move_uci = stockfish.get_best_move()
+                    best_move = chess.Move.from_uci(best_move_uci)
+                    explanation = get_explanation(board, best_move)
+                    print("\nTabla inainte de mutare:")
+                    print(board)
+                    print("\nCea mai buna mutare: ", best_move)
+                    print("Explicatie: ", explanation)
+                    winning_percentage = compute_winning_percentage(board, best_move)
+                    if winning_percentage < 40 or winning_percentage == "Nedefinit":
+                        print(f"Aceasta mutare este una obisnuita. ({winning_percentage}%)")
+                    elif winning_percentage < 50:
+                        print(f"Este o mutare buna. ({winning_percentage}%)")
+                    elif winning_percentage < 60:
+                        print(f"Este o mutare foarte buna. ({winning_percentage}%)")
+                    else:
+                        print(f"Aceasta mutare iti ofera sanse mari de castig. ({winning_percentage}%)")
+                    stockfish.make_moves_from_current_position([best_move_uci])
+                    board.push_san(best_move_uci)
+                    print("Noua configuratie ", board.fen())
+                    print("\nTabla dupa realizarea mutarii: ")
+                    print(board)   
             else:
-                print("Configuratie invalida!")
+                    print("Configuratie invalida!")
  
  
 def compute_winning_percentage(board, move):
@@ -208,9 +208,9 @@ def get_explanation(board, move):
  
     if board.is_checkmate():
         if board.turn:
-            return " Este sah mat. Albul a castigat partida!"
-        else:
             return " Este sah mat. Negrul a castigat partida!"
+        else:
+            return " Este sah mat. Albul a castigat partida!"
  
     if board.is_check():
         if board.turn:
@@ -661,14 +661,15 @@ if __name__ == "__main__":
     train()
     parser()
  
-    board = chess.Board("rnb1kbnr/ppp2ppp/8/3q4/2B5/8/PPPP1PPP/RNBQK1NR w KQkq - 0 5")
-    move = chess.Move.from_uci("c4d6")
-    explanation = get_explanation(board, move)
-    print(explanation)
-    print(board)
-    board.push(move)
-    print(board.fen())
-    print(compute_winning_percentage(board,move))
+    # board = chess.Board("rnbqkbnr/pppp1ppp/8/4p3/5PP1/8/PPPP3P/RNBQKBNR b KQkq - 0 1")
+    # print(board.is_checkmate())
+    # move = chess.Move.from_uci("d8h4")
+    # explanation = get_explanation(board, move)
+    # print(explanation)
+    # print(board)
+    # board.push(move)
+    # print(board.fen())
+    # print(compute_winning_percentage(board,move))
     main()
     # print(white_wins)
     # print(black_wins)
@@ -703,13 +704,11 @@ if __name__ == "__main__":
 
 # https://www.dailychess.com/chess/chess-fen-viewer.php
 # Configuratii: 
+# default: rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1
+# 
 # promovare: r3kbnr/pP2pppp/8/8/8/8/P1PPPPPP/RNBQKBNR w KQkq - 0 1
 # b7b8
-# sah:
-#
-# sah mat: 
-#
-# produc sah:
-#
-# produc sah mat:
-#
+# produc sah: rnbqkbnr/pppp1ppp/8/4p3/5PP1/8/PPPP3P/RNBQKBNR b KQkq - 0 1
+# d8d4
+# produc sah mat: rnbqkbnr/pppp1ppp/8/4p3/5PP1/8/PPPPP2P/RNBQKBNR b KQkq - 0 1
+# d8h4
